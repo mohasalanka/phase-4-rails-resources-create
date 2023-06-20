@@ -16,4 +16,15 @@ class BirdsController < ApplicationController
     end
   end
 
+  # POST /birds
+  def create
+    bird = Bird.create(name: params[:name], species: params[:species])
+    if bird.valid?
+      render json: bird, status: :created
+    else
+      render json: { error: "Failed to create bird" }, status: :unprocessable_entity
+    end
+  end
+  
+
 end
